@@ -1,0 +1,25 @@
+body {
+  @mixin transition color, 2s, ease-in;
+}
+
+header {
+  @mixin viewport-min {
+    background-color: red;
+  }
+}
+
+.page {
+  display: flex;
+  background-color: black;
+  color: pink;
+
+  &__header {
+    color: red;
+    font-size: var(--font-size);
+  }
+
+  &__blockqoute {
+    color: red;
+    font-size: 10rem;
+  }
+}

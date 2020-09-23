@@ -1,0 +1,71 @@
+{
+  "name": "postcss-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "html:process": "posthtml 'html/templates/views/*.html' -o html/pages",
+    "styles:import": "node css/scripts/imports.js",
+    "styles:process": "postcss css/styles.compiled.css -o css/styles.css --config css/scripts/postcss.config.js",
+    "dev:watch": "onchange 'css/styles' 'html/templates' -- run-p html:process styles:import styles:process",
+    "dev:server": "browser-sync start --server --ss 'html/pages' --files 'css/**/*.css, html/templates/**/*.html js/*.js' --no-notify --no-open",
+    "server": "run-p dev:watch dev:server",
+    "build:clean": "rm -rf dist",
+    "build:dist": "mkdir -p dist/{css,js,img,fonts/web}",
+    "build:html-validate": "posthtml 'html/pages/*html' --use posthtml-w3c",
+    "build:html-dist": "cp html/pages/*.html dist",
+    "build:styles-compile": "run-s styles:import styles:process",
+    "build:styles-unused": "purgecss -css css/styles.css --content html/pages/*.html --output css/styles.clean.css",
+    "build:styles-minify": "postcss css/styles.clean.css > dist/css/styles.css --use cssnano",
+    "build:styles-critical": "node css/scripts/critical.js",
+    "build:styles-clean": "rm -rf css/styles.*.css",
+    "build:html-minify": "html-minifier --input-dir dist --output-dir dist --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-tag-whitespace",
+    "build": "run-s build:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-rational-order"
+    ]
+  },
+  "posthtml": {
+    "plugins": {
+      "posthtml-modules": {
+        "root": "html/views"
+      },
+      "posthtml-hint": {}
+    }
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.0.0",
+    "browser-sync": "^2.26.12",
+    "critical": "^2.0.4",
+    "cssnano": "^4.1.10",
+    "html-minifier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.0.2",
+    "postcss": "^7.0.34",
+    "postcss-cli": "^8.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-mixins": "^6.0.0",
+    "postcss-nested": "^4.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "posthtml": "^0.13.3",
+    "posthtml-cli": "^0.7.6",
+    "posthtml-hint": "^0.8.3",
+    "posthtml-load-config": "^2.0.0",
+    "posthtml-modules": "^0.6.2",
+    "posthtml-w3c": "^0.9.0",
+    "purgecss": "^3.0.0",
+    "stylelint": "^13.7.1",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^20.0.0"
+  },
+  "dependencies": {}
+}
