@@ -6,7 +6,7 @@
   "scripts": {
     "html:process": "posthtml 'html/templates/views/*.html' -o html/pages",
     "styles:import": "node css/scripts/imports.js",
-    "styles:process": "postcss css/styles.compiled.css -o css/styles.css --config css/scripts/postcss.config.js",
+    "styles:process": "postcss css/styles.compiled.css -o css/styles.css",
     "js:lint": "eslint js",
     "dev:watch": "onchange 'css/styles' 'html/templates' -- run-p html:process styles:import styles:process",
     "dev:server": "browser-sync start --server --ss 'html/pages' --files 'css/**/*.css, html/templates/**/*.html js/*.js' --no-notify --no-open",
@@ -44,6 +44,17 @@
       "posthtml-hint": {}
     }
   },
+  "postcss": {
+    "plugins": {
+      "postcss-nested": {},
+      "postcss-mixins": {},
+      "postcss-preset-env": {},
+      "stylelint": {
+        "fix": "true"
+      },
+      "autoprefixer": {}
+    }
+  },
   "devDependencies": {
     "autoprefixer": "^9.0.0",
     "browser-sync": "^2.26.12",
@@ -56,6 +67,7 @@
     "postcss": "^7.0.34",
     "postcss-cli": "^8.0.0",
     "postcss-import": "^12.0.1",
+    "postcss-load-config": "^2.1.1",
     "postcss-mixins": "^6.0.0",
     "postcss-nested": "^4.0.0",
     "postcss-preset-env": "^6.7.0",
