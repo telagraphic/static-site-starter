@@ -27,15 +27,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "browserslist": [
-    "last 2 versions"
-  ],
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-rational-order"
-    ]
-  },
   "posthtml": {
     "plugins": {
       "posthtml-modules": {
@@ -54,6 +45,15 @@
       },
       "autoprefixer": {}
     }
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-rational-order"
+    ]
   },
   "devDependencies": {
     "autoprefixer": "^9.0.0",
