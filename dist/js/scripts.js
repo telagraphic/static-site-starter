@@ -1,0 +1,1 @@
+const site="static-site-server";console.log(site),console.log("scripts.js is working");

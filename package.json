@@ -7,6 +7,7 @@
     "html:process": "posthtml 'html/templates/views/*.html' -o html/pages",
     "styles:import": "node css/scripts/imports.js",
     "styles:process": "postcss css/styles.compiled.css -o css/styles.css --config css/scripts/postcss.config.js",
+    "js:lint": "eslint js",
     "dev:watch": "onchange 'css/styles' 'html/templates' -- run-p html:process styles:import styles:process",
     "dev:server": "browser-sync start --server --ss 'html/pages' --files 'css/**/*.css, html/templates/**/*.html js/*.js' --no-notify --no-open",
     "server": "run-p dev:watch dev:server",
@@ -20,6 +21,7 @@
     "build:styles-critical": "node css/scripts/critical.js",
     "build:styles-clean": "rm -rf css/styles.*.css",
     "build:html-minify": "html-minifier --input-dir dist --output-dir dist --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-tag-whitespace",
+    "build:js-minify": "terser js/*.js -o dist/js/scripts.js -c -m",
     "build": "run-s build:*"
   },
   "keywords": [],
@@ -47,6 +49,7 @@
     "browser-sync": "^2.26.12",
     "critical": "^2.0.4",
     "cssnano": "^4.1.10",
+    "eslint": "^7.2.0",
     "html-minifier": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.0.2",
@@ -65,7 +68,8 @@
     "purgecss": "^3.0.0",
     "stylelint": "^13.7.1",
     "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "terser": "^5.3.2"
   },
   "dependencies": {}
 }
